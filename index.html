@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A vanilla JavaScript project that demonstrates persisting form data on page reload.">
+    <title>Form Saver</title>
+    <link href="css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Form Saver</h1>
+    <p>Fill the form with values, then reload this page to see the JavaScript in action. The fields will retain their values.</p>
+    <form>
+      <div>
+        <label for="name">Name</label>
+        <input id="name" type="text" name="name">
+      </div>
+      <div>
+        <label for="address">Address</label>
+        <input id="address" type="text" name="address">
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email">
+      </div>
+      <div>
+        <label for="more">Additional thoughts?</label>
+        <textarea id="more" name="more"></textarea>
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+    <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
