@@ -68,14 +68,7 @@
    * Remove the `data` key from local storage
    */
   function clearData(event) {
-    // Stop the form from submitting
-    event.preventDefault();
-
-    // Remove the `data` key from local storage
     localStorage.removeItem("data");
-
-    // Submit the form
-    this.submit();
   }
 
 
