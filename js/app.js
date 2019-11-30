@@ -61,7 +61,7 @@
     if (!fieldName) return;
 
     // Save the field's value to local storage
-    addToLocalStorageObject("data", fieldName, field.value)
+    addToLocalStorageObject("data", fieldName, field.value);
   }
 
   /**
