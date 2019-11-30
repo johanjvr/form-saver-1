@@ -53,29 +53,21 @@
    * Save a form field's value to local storage
    */
   function saveData(event) {
-    // Get the current field and its name attribute
-    var field = event.target;
-    var fieldName = field.getAttribute("name");
+    // Get the current field's name attribute
+    var fieldName = event.target.getAttribute("name");
 
     // Bail if the field's name attribute is falsy
     if (!fieldName) return;
 
     // Save the field's value to local storage
-    addToLocalStorageObject("data", fieldName, field.value)
+    addToLocalStorageObject("data", fieldName, event.target.value);
   }
 
   /**
    * Remove the `data` key from local storage
    */
   function clearData(event) {
-    // Stop the form from submitting
-    event.preventDefault();
-
-    // Remove the `data` key from local storage
     localStorage.removeItem("data");
-
-    // Submit the form
-    this.submit();
   }
 
 
