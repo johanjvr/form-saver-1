@@ -38,11 +38,11 @@
     // Get the existing data
     var existing = localStorage.getItem(name);
 
-    // If no existing data, create an array
-    // Otherwise, convert the localStorage string to an array
+    // If no existing data, create an object literal
+    // Otherwise, convert the localStorage string into an object literal
     existing = existing ? JSON.parse(existing) : {};
 
-    // Add new data to localStorage Array
+    // Add new data to localStorage object
     existing[key] = value;
 
     // Save back to localStorage
