@@ -31,7 +31,7 @@
   }
 
   /**
-   * Add an item to a Storage object
+   * Add an item to a JSON object in local storage
    * (c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
    */
   function addToLocalStorageObject(name, key, value) {
