@@ -1,4 +1,4 @@
-;(function(d) {
+;(function() {
 
   "use strict";
 
@@ -7,7 +7,7 @@
   //
 
   var data = localStorage.getItem("data");
-  var form = d.querySelector("form");
+  var form = document.querySelector("form");
 
 
   //
@@ -26,12 +26,12 @@
 
     // Add each value to the DOM
     for (var field in data) {
-      d.querySelector("[name='" + field + "']").value = data[field];
+      document.querySelector("[name='" + field + "']").value = data[field];
     }
   }
 
   /**
-   * Add an item to a Storage object
+   * Add an item to a JSON object in local storage
    * (c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
    */
   function addToLocalStorageObject(name, key, value) {
@@ -84,4 +84,4 @@
   // Clear saved values when user submits form
   form.addEventListener("submit", clearData, false);
 
-})(document);
+})();
