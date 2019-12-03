@@ -26,7 +26,22 @@
 
     // Add each value to the DOM
     for (var field in data) {
-      document.querySelector("[name='" + field + "']").value = data[field];
+      switch (field) {
+        case "superheroes":
+          data[field].forEach(function(superhero) {
+            document.querySelector("[name='" + superhero + "']").checked = true;
+          });
+          break;
+        case "tos":
+          var savedValue = data[field];
+          var field = Array.prototype.slice.call(document.querySelectorAll("[name='" + field + "']")).filter(function(field) {
+            return field.value === savedValue;
+          })[0];
+          field.checked = true;
+          break;
+        default:
+          document.querySelector("[name='" + field + "']").value = data[field];
+      }
     }
   }
 
@@ -73,7 +88,7 @@
           event.target.closest("div").querySelectorAll(":checked")
         );
         checked.forEach(function(checkbox) {
-          value.push(checkbox.parentNode.textContent.trim());
+          value.push(checkbox.getAttribute("name"));
         });
         break;
       // Else, just store the value as a string
