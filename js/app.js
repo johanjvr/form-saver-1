@@ -87,9 +87,7 @@
         break;
       // If a checkbox, get ALL checked values and store as an array
       case "checkbox":
-        var checked = Array.from(
-          event.target.closest("div").querySelectorAll(":checked")
-        );
+        var checked = Array.from(event.target.closest("div").querySelectorAll(":checked"));
         checked.forEach(function(checkbox) {
           value.push(checkbox.getAttribute("name"));
         });
