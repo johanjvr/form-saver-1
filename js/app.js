@@ -26,8 +26,54 @@
 
     // Add each value to the DOM
     for (var field in data) {
-      document.querySelector("[name='" + field + "']").value = data[field];
+      switch (field) {
+        // If the superheroes array, check the corresponding checkboxes
+        case "superheroes":
+          data[field].forEach(function(superhero) {
+            document.querySelector("[name='" + superhero + "']").checked = true;
+          });
+          break;
+        // Else if the terms of service radio, check the relevant radio
+        case "tos":
+          var savedValue = data[field];
+          Array.from(document.querySelectorAll("[name='" + field + "']")).filter(function(field) {
+            return field.value === savedValue;
+          })[0].checked = true;
+          break;
+        // Else, just get the field by name and set its value
+        default:
+          document.querySelector("[name='" + field + "']").value = data[field];
+      }
     }
+  }
+
+  /**
+   * Get the value from a field to use for a local storage object
+   */
+  function getValue(field) {
+    // If a checkbox, use an array; if not, use a string
+    var value = (field.type === "checkbox") ? [] : "";
+
+    // Get the value depending on the field type
+    switch (field.type) {
+      // If a radio, ONLY get the checked value
+      case "radio":
+        value += document.querySelector("[name='" + field.getAttribute("name") + "']:checked").value;
+        break;
+      // If a checkbox, get ALL checked values and store as an array
+      case "checkbox":
+        var checked = Array.from(field.closest("div").querySelectorAll(":checked"));
+        checked.forEach(function(checkbox) {
+          value.push(checkbox.getAttribute("name"));
+        });
+        break;
+      // Else, just store the value as a string
+      default:
+        value = field.value;
+    }
+
+    // Return the value
+    return value;
   }
 
   /**
@@ -56,11 +102,18 @@
     // Get the current field's name attribute
     var fieldName = event.target.getAttribute("name");
 
+    // Create a variable to store the current field's value
+    var value;
+
     // Bail if the field's name attribute is falsy
     if (!fieldName) return;
 
+    // Set the value
+    value = getValue(event.target);
+
     // Save the field's value to local storage
-    addToLocalStorageObject("data", fieldName, event.target.value);
+    fieldName = (Array.isArray(value)) ? "superheroes" : fieldName;
+    addToLocalStorageObject("data", fieldName, value);
   }
 
   /**
