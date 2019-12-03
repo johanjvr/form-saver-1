@@ -79,6 +79,7 @@
     // Bail if the field's name attribute is falsy
     if (!fieldName) return;
 
+    // Set the value
     switch (event.target.type) {
       // If a radio, ONLY get the checked value
       case "radio":
