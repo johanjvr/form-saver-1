@@ -48,6 +48,35 @@
   }
 
   /**
+   * Get the value from a field to use for a local storage object
+   */
+  function getValue(field) {
+    // If a checkbox, use an array; if not, use a string
+    var value = (field.type === "checkbox") ? [] : "";
+
+    // Get the value depending on the field type
+    switch (field.type) {
+      // If a radio, ONLY get the checked value
+      case "radio":
+        value += document.querySelector("[name='" + field.getAttribute("name") + "']:checked").value;
+        break;
+      // If a checkbox, get ALL checked values and store as an array
+      case "checkbox":
+        var checked = Array.from(field.closest("div").querySelectorAll(":checked"));
+        checked.forEach(function(checkbox) {
+          value.push(checkbox.getAttribute("name"));
+        });
+        break;
+      // Else, just store the value as a string
+      default:
+        value = field.value;
+    }
+
+    // Return the value
+    return value;
+  }
+
+  /**
    * Add an item to a JSON object in local storage
    * (c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
    */
@@ -74,28 +103,13 @@
     var fieldName = event.target.getAttribute("name");
 
     // Create a variable to store the current field's value
-    var value = (event.target.type === "checkbox") ? [] : "";
+    var value;
 
     // Bail if the field's name attribute is falsy
     if (!fieldName) return;
 
     // Set the value
-    switch (event.target.type) {
-      // If a radio, ONLY get the checked value
-      case "radio":
-        value += document.querySelector("[name='" + fieldName + "']:checked").value;
-        break;
-      // If a checkbox, get ALL checked values and store as an array
-      case "checkbox":
-        var checked = Array.from(event.target.closest("div").querySelectorAll(":checked"));
-        checked.forEach(function(checkbox) {
-          value.push(checkbox.getAttribute("name"));
-        });
-        break;
-      // Else, just store the value as a string
-      default:
-        value = event.target.value;
-    }
+    value = getValue(event.target);
 
     // Save the field's value to local storage
     fieldName = (Array.isArray(value)) ? "superheroes" : fieldName;
