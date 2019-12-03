@@ -34,7 +34,7 @@
           break;
         case "tos":
           var savedValue = data[field];
-          var field = Array.prototype.slice.call(document.querySelectorAll("[name='" + field + "']")).filter(function(field) {
+          var field = Array.from(document.querySelectorAll("[name='" + field + "']")).filter(function(field) {
             return field.value === savedValue;
           })[0];
           field.checked = true;
@@ -84,7 +84,7 @@
         break;
       // If a checkbox, get ALL checked values and store as an array
       case "checkbox":
-        var checked = Array.prototype.slice.call(
+        var checked = Array.from(
           event.target.closest("div").querySelectorAll(":checked")
         );
         checked.forEach(function(checkbox) {
