@@ -56,11 +56,34 @@
     // Get the current field's name attribute
     var fieldName = event.target.getAttribute("name");
 
+    // Create a variable to store the current field's value
+    var value = (event.target.type === "checkbox") ? [] : "";
+
     // Bail if the field's name attribute is falsy
     if (!fieldName) return;
 
+    switch (event.target.type) {
+      // If a radio, ONLY get the checked value
+      case "radio":
+        value += document.querySelector("[name='" + fieldName + "']:checked").value;
+        break;
+      // If a checkbox, get ALL checked values and store as an array
+      case "checkbox":
+        var checked = Array.prototype.slice.call(
+          event.target.closest("div").querySelectorAll(":checked")
+        );
+        checked.forEach(function(checkbox) {
+          value.push(checkbox.parentNode.textContent.trim());
+        });
+        break;
+      // Else, just store the value as a string
+      default:
+        value = event.target.value;
+    }
+
     // Save the field's value to local storage
-    addToLocalStorageObject("data", fieldName, event.target.value);
+    fieldName = (Array.isArray(value)) ? "superheroes" : fieldName;
+    addToLocalStorageObject("data", fieldName, value);
   }
 
   /**
