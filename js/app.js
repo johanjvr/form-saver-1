@@ -36,10 +36,9 @@
         // Else if the terms of service radio, check the relevant radio
         case "tos":
           var savedValue = data[field];
-          var field = Array.from(document.querySelectorAll("[name='" + field + "']")).filter(function(field) {
+          Array.from(document.querySelectorAll("[name='" + field + "']")).filter(function(field) {
             return field.value === savedValue;
-          })[0];
-          field.checked = true;
+          })[0].checked = true;
           break;
         // Else, just get the field by name and set its value
         default:
