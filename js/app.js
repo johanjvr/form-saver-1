@@ -25,25 +25,27 @@
     data = JSON.parse(data);
 
     // Add each value to the DOM
-    switch (field) {
-      // If the superheroes array, check each corresponding checkbox
-      case "superheroes":
-        data[field].forEach(function(superhero) {
-          document.querySelector("[name='" + superhero + "']").checked = true;
-        });
-        break;
-      // Else if the terms of service radio input, check the appropriate one
-      case "tos":
-        var savedValue = data[field];
-        var fields = Array.from(document.querySelectorAll("[name='" + field + "']"));
-        var fieldToCheck = fields.filter(function(field) {
-          return field.value === savedValue;
-        })[0];
-        field.checked = true;
-        break;
-      // Else, just get the field by name and set its value as a string
-      default:
-      document.querySelector("[name='" + field + "']").value = data[field];
+    for (var field in data) {
+      switch (field) {
+        // If the superheroes array, check each corresponding checkbox
+        case "superheroes":
+          data[field].forEach(function(superhero) {
+            document.querySelector("[name='" + superhero + "']").checked = true;
+          });
+          break;
+        // Else if the terms of service radio input, check the appropriate one
+        case "tos":
+          var savedValue = data[field];
+          var fields = Array.from(document.querySelectorAll("[name='" + field + "']"));
+          var fieldToCheck = fields.filter(function(field) {
+            return field.value === savedValue;
+          })[0];
+          field.checked = true;
+          break;
+        // Else, just get the field by name and set its value as a string
+        default:
+          document.querySelector("[name='" + field + "']").value = data[field];
+      }
     }
   }
 
