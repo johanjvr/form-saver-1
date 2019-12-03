@@ -27,11 +27,13 @@
     // Add each value to the DOM
     for (var field in data) {
       switch (field) {
+        // If the superheroes array, check the corresponding checkboxes
         case "superheroes":
           data[field].forEach(function(superhero) {
             document.querySelector("[name='" + superhero + "']").checked = true;
           });
           break;
+        // Else if the terms of service radio, check the relevant radio
         case "tos":
           var savedValue = data[field];
           var field = Array.from(document.querySelectorAll("[name='" + field + "']")).filter(function(field) {
@@ -39,6 +41,7 @@
           })[0];
           field.checked = true;
           break;
+        // Else, just get the field by name and set its value
         default:
           document.querySelector("[name='" + field + "']").value = data[field];
       }
