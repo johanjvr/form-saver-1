@@ -20,12 +20,12 @@ div:not(:last-child) {
   margin-bottom: 1em;
 }
 
-label, input, textarea {
+label, input:not([type="radio"]):not([type="checkbox"]), textarea {
   display: block;
   width: 100%;
 }
 
-input, textarea {
+input:not([type="radio"]):not([type="checkbox"]), textarea {
   padding: .5em;
   border: 1px solid #999;
   font-size: inherit;
@@ -33,4 +33,8 @@ input, textarea {
 
 label {
   font-weight: bold;
+}
+
+.normal {
+  font-weight: normal;
 }
