@@ -6,7 +6,7 @@
   // Variables
   //
 
-  var data = localStorage.getItem("data");
+  var data = localStorage.getItem("form-autosave");
   var form = document.querySelector("form");
 
 
@@ -20,6 +20,9 @@
   function setValue(field, data) {
     // Get the field's name attribute
     var name = field.getAttribute("name");
+
+    // Bail if the data hasn't been set for this field
+    if (!data[name]) return;
 
     // Set the field's value to its saved value
     if (field.type === "checkbox") {
@@ -91,14 +94,14 @@
     }
 
     // Save the field's value to local storage
-    addToLocalStorageObject("data", fieldName, value);
+    addToLocalStorageObject("form-autosave", fieldName, value);
   }
 
   /**
    * Remove the `data` key from local storage
    */
   function clearData(event) {
-    localStorage.removeItem("data");
+    localStorage.removeItem("form-autosave");
   }
 
 
